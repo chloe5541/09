@@ -1,31 +1,52 @@
 #include <stdio.h>
-#define SIZE 4
+#include <stdlib.h>
 
-void square_array(int a[], int size);
-void print_array(int a[], int size);
+#define ROWS 3
+#define COLS 3
+
+void addMatrix(int A[][COLS], int B[][COLS], int C[][COLS])
+{
+    int i, j;
+    for(i = 0; i < ROWS; i++)
+    {
+        for(j = 0; j < COLS; j++)
+        {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+}
+
+void printMatrix(int matrix[][COLS])
+{
+    int i, j;
+    for(i = 0; i < ROWS; i++)
+    {
+        for(j = 0; j < COLS; j++)
+            printf("%d ", matrix[i][j]);
+        printf("\n");
+    }
+}
 
 int main(void)
 {
-    int list[SIZE] = {1, 2, 3, 4};
+    int A[ROWS][COLS] = {
+        {2, 3, 0},
+        {8, 9, 1},
+        {7, 0, 5}
+    };
+    
+    int B[ROWS][COLS] = {
+        {1, 0, 0},
+        {0, 1, 0},
+        {0, 0, 1}
+    };
 
-    print_array(list, SIZE);
-    square_array(list, SIZE);
-    print_array(list, SIZE);
+    int C[ROWS][COLS]; 
+
+    addMatrix(A, B, C);
+
+    printf("Matrix A + Matrix B = \n");
+    printMatrix(C);
 
     return 0;
-}
-
-void square_array(int a[], int size)
-{
-    int i;
-    for (i = 0; i < size; i++)
-        a[i] = a[i] * a[i];
-}
-
-void print_array(int a[], int size)
-{
-    int i;
-    for (i = 0; i < size; i++)
-        printf("%3d", a[i]);
-    printf("\n");
 }
